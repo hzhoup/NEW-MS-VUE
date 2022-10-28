@@ -3,9 +3,11 @@ env:
   browser: true
   es2021: true
   node: true
+parser: vue-eslint-parser
 extends:
+  - eslint:recommended
   - plugin:vue/vue3-recommended
-  - standard
+  - prettier
 overrides: []
 parserOptions:
   ecmaVersion: latest
@@ -13,8 +15,6 @@ parserOptions:
   ecmaFeatures:
     jsx: true
     modules: true
-  parser: '@babel/eslint-parser'
 plugins:
   - vue
-  - prettier
 rules: {}
