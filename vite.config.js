@@ -5,7 +5,11 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
-import { AndDesignVueResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
+import {
+  AndDesignVueResolve,
+  createStyleImportPlugin,
+  VxeTableResolve
+} from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,7 +29,7 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver({ resolveIcons: true })]
     }),
     createStyleImportPlugin({
-      resolves: [AndDesignVueResolve()],
+      resolves: [AndDesignVueResolve(), VxeTableResolve()],
       libs: [
         {
           libraryName: 'ant-design-vue',
