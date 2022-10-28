@@ -1,11 +1,11 @@
 <template>
-  <a-configprovider
+  <a-config-provider
     :locale="locale"
     :component-size="comSize"
     :get-popup-container="getPopupContainer"
   >
     <router-view />
-  </a-configprovider>
+  </a-config-provider>
 </template>
 
 <script setup>
