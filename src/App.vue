@@ -1,11 +1,15 @@
 <template>
-  <a-config-provider
-    :locale="locale"
-    :component-size="comSize"
-    :get-popup-container="getPopupContainer"
-  >
-    <router-view />
-  </a-config-provider>
+  <a-spin size="large" :spinning="false">
+    <a-config-provider
+      :locale="locale"
+      :component-size="comSize"
+      :get-popup-container="getPopupContainer"
+    >
+      <main class="w-screen h-screen bg-gray-100 overflow-hidden font-sans">
+        <router-view />
+      </main>
+    </a-config-provider>
+  </a-spin>
 </template>
 
 <script setup>

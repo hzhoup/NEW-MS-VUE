@@ -19,6 +19,7 @@ export default defineConfig({
     vueJsx(),
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
+      resolvers: [AntDesignVueResolver()],
       eslintrc: {
         enabled: true,
         filepath: './.eslintrc-auto-import.json',
@@ -26,7 +27,7 @@ export default defineConfig({
       }
     }),
     Components({
-      resolvers: [AntDesignVueResolver({ resolveIcons: true })]
+      resolvers: [AntDesignVueResolver({ importStyle: true, resolveIcons: true })]
     }),
     createStyleImportPlugin({
       resolves: [AndDesignVueResolve(), VxeTableResolve()],
@@ -52,7 +53,7 @@ export default defineConfig({
     }
   },
   server: {
-    port: 9000,
+    port: 9200,
     cors: true,
     proxy: {
       '/api': {
