@@ -1,20 +1,19 @@
 const config = {
   type: 'localStorage',
-  prefix: 'ms',
+  prefix: 'ms_',
   expire: 7 * 24 * 60 * 60 * 1000, // 过期时间
   isEncrypt: true
 }
 
-export const setStorage = (key, value, expire = 0) => {
+export const setStorage = (key, value, expire = config.expire) => {
   if (value === '' || value === null || value === undefined) {
     value = null
   }
-  if (isNaN(expire) || expire < 0) expire = 7 * 24 * 60 * 60 * 1000
 
   const data = {
-    value: value,
+    value,
     time: Date.now(),
-    expire: expire
+    expire
   }
   const dataJson = JSON.stringify(data)
   window[config.type].setItem(`${config.prefix}${key}`, dataJson)

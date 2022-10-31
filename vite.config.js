@@ -37,16 +37,16 @@ export default defineConfig({
           esModule: true,
           resolveStyle: (name) => `ant-design-vue/es/${name}/style/index`
         }
-      ],
-      css: {
-        preprocessorOptions: {
-          less: {
-            javascriptEnabled: true
-          }
-        }
-      }
+      ]
     })
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')

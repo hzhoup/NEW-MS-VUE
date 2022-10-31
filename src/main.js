@@ -7,6 +7,7 @@ import { useVxeTable } from '@/utils/useVxeTable.js'
 
 import './styles/common.scss'
 import 'dayjs/locale/zh-cn'
+import 'nprogress/nprogress.css'
 
 dayjs.locale('zh-cn')
 

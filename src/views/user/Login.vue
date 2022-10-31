@@ -7,11 +7,11 @@
       <a-tab-pane key="userLogin" tab="系统登录">
         <a-form class="w-80" :model="loginState" @finish="onFinish">
           <a-form-item
-            name="username"
+            name="userName"
             :rules="[{ required: true, message: '请输入账号' }]"
             validate-trigger="blur"
           >
-            <a-input v-model:value="loginState.username" size="large" placeholder="账号">
+            <a-input v-model:value="loginState.userName" size="large" placeholder="账号">
               <template #prefix>
                 <user-outlined :style="{ color: 'rgba(0,0,0,.25)' }" />
               </template>
@@ -39,32 +39,23 @@
 
 <script setup>
 import * as dd from 'dingtalk-jsapi'
+import { loginByCode, user } from '@/apis/user.js'
+import { notification } from 'ant-design-vue'
 
+const router = useRouter()
 const notInDingTalk = dd.env.platform === 'notInDingTalk'
-console.log(notInDingTalk, dd)
 
 if (notInDingTalk) {
-  const code = getQuery('code')
-  console.log(code)
   getDingCode()
 } else {
-  loginByCode()
+  LoginByCode()
 }
 
 const activeKey = ref('dingdingKey')
 const loginState = reactive({
-  username: '',
+  userName: '',
   password: ''
 })
-
-function getQuery(name) {
-  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
-  const r = window.location.search.substring(1).match(reg)
-  if (r != null) {
-    return decodeURI(r[2])
-  }
-  return null
-}
 
 function getDingCode() {
   nextTick(() => {
@@ -91,11 +82,11 @@ function getDingCode() {
   })
 }
 
-function loginByCode() {
+function LoginByCode() {
   dd.runtime.permission.requestAuthCode({
     corpId: window.yskc.corpId,
     onSuccess: ({ code }) => {
-      LoginByCode(code)
+      loginByCode({ code }).then(() => success())
     },
     onFail: () => {
       console.log('fail')
@@ -103,12 +94,15 @@ function loginByCode() {
   })
 }
 
-function LoginByCode(code) {
-  console.log(code)
-}
+const onFinish = (value) => user(value).then(() => success())
 
-function onFinish(value) {
-  console.log(value)
+async function success() {
+  router.push({ name: 'login' })
+  await nextTick()
+  notification.success({
+    message: '欢迎',
+    description: '欢迎回来'
+  })
 }
 </script>
 
